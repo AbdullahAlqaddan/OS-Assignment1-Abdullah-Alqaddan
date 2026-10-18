@@ -231,7 +231,7 @@
 
 **Your Answer:** *(5-7 sentences)*
 
-[Write your answer here.]
+[The most difficult and also the most enjoyable part of this assignment was working with Java threads and seeing how they behave inside a scheduler  It was hard because I had to understand how `start()`and `join()` and `Thread.sleep()` work together and how the main thread controls which process runs next Watching the ready queue after every quantum helped me see how a process that does not finish goes back to the end of the queue so the order of the processes keeps changing I also saw how a very small change in the code like where a counter is incremented or a time is recorded can change the whole output For example the context switch count and the waiting times depend on exactly where I placed those lines This showed me that in multithreaded programs the order and position of every call really matters]
 
 ## Question 3: How did you overcome the challenges you faced?
 
@@ -239,7 +239,7 @@
 
 **Your Answer:** *(5-7 sentences)*
 
-[Write your answer here.]
+[To overcome the challenges I first went back to the code examples in the course slides and watched some videos on the Tuwaiq learning platform to understand more about how threads work I also asked my classmate Ibrahim Al-Tufail when I got stuck and we discussed the ideas together while I wrote my own code I used an AI assistant to guide me through the setup steps and to check whether my work was right or wrong and then I read the code again until I understood what each part does When VS Code showed the error "no registered task type 'Java'" I fixed it by checking the Java extension reopening the project folder and running the program again When the table printed Arabic-Indic digits I solved it by adding `Locale.US` to `printf` I also tested the program after each small change which made it easier to find which line caused a problem]
 
 ## Question 4: How can you apply multithreading concepts in real-world applications?
 
@@ -247,19 +247,19 @@
 
 **Your Answer:** *(5-7 sentences)*
 
-[Write your answer here.]
+[Multithreading is used in almost every real application For example in Spotify one thread plays the audio another thread downloads the next song from the internet and a third thread updates the lyrics and the progress bar on the screen This is similar to my simulation where each process runs inside its own thread that executes the `run()` method The progress bar I print inside `run()` is a small example of a thread doing a task step by step while using `Thread.sleep()` between the updates Web browsers do the same when each tab loads its page in a separate thread so that one slow tab does not freeze the others Learning how `start()` and `join()` control the order of threads helps me understand why these applications stay responsive and why synchronization is important when threads share data]
 
 ### Optional: What would you like to learn more about?
 
-[Any topics related to threading or operating systems that you're curious about?]
+[I would like to learn more about SJF scheduling deadlocks and mutexes I enjoy analyzing how these concepts work even though I still get a little confused by them I think understanding them better will help me write safer and more efficient multithreaded programs]
 
 ### Optional: How confident do you feel about multithreading concepts now?
 
-[Beginner / Intermediate / Confident. What do you understand well? What needs more practice?]
+[Intermediate I am neither a beginner nor an expert but I want to keep improving and understand more. I understand how `start()`and`join()` and `Thread.sleep()` work and how Round-Robin sends an unfinished process to the end of the queue I need more practice with mutexes deadlocks and the thread lifecycle states]
 
 ### Optional: Feedback on the assignment
 
-[Any comments? Was it helpful? Too easy or hard? Suggestions?]
+[The assignment was useful and I learned a lot from it I wish I had not been late in submitting it and that I had started earlier so I could learn and understand more I will make sure not to repeat this mistake and waste opportunities like this in the future]
 
 ---
 
@@ -277,9 +277,8 @@
 
 > 💡 **TIP:** Note that the class named `Process` in our code is a *simulated* process, and it is run by a real Java *thread*. Explain that distinction and point to the `new Thread(process)` line in `addProcessToQueue()`.
 
-**Your Answer:** *(3-5 sentences)*
 
-[Write your answer here.]
+[A process is an independent program with its own private memory space while a thread is a smaller unit of execution inside a process that shares the memory of the other threads in the same process Creating a process is heavy and slow because the operating system must allocate memory and a separate Process Control Block (PCB) but a thread is lightweight and faster to create and to switch between Threads can also communicate quickly through shared variables while processes need inter-process communication such as pipes or sockets In this assignment I used threads because all the simulated processes need to share the same `processQueue`, `processMap` and `contextSwitchCount` inside one program The class named `Process` in my code is only a simulated process and the real Java thread is created by `Thread thread = new Thread(process);` in `addProcessToQueue()`]
 
 ## Question 2: Ready Queue Behavior
 
@@ -291,15 +290,15 @@
 
 **Your Answer:** *(3-5 sentences)*
 
-[Write your answer here.]
 
-Example from my output:
-```
-[Paste a relevant snippet from your program output here showing a process being re-queued]
-```
+In Round-Robin when a process does not finish within its time quantum the scheduler puts it back at the end of the ready queue so the next process can use the CPU For example P1 has a burst time of 12038ms and the quantum is 5000ms so it ran for 5000ms then 5000ms again and finally 2038ms which means it was re-queued 2 times before it finishedd Re-queueing matters for fairness because a long process cannot monopolize the CPU and every process gets a regular turn of the same length This also improves the response time of the whole system
+
+Example from my output: P1
 
 **Explanation of example:**
-[Explain what is happening in the output snippet you pasted.]
+P1 used its full 5000ms quantum and still had 7038ms left so it printed "yields CPU for context switch" It was then added to the ready queue again and placed at the back behind P14 The other 13 processes each get a turn before P1 runs again which shows the fairness of Round-Robin
+
+
 
 ## Question 3: Thread Lifecycle
 
@@ -309,15 +308,16 @@ Example from my output:
 
 **Your Answer:** *(3-5 sentences overall; one short explanation per state)*
 
-1. **New**: [When is P1 in the New state?]
 
-2. **Runnable**: [When does P1 become Runnable?]
+1. **New**: P1thread is in the New state right after `Thread thread = new Thread(process);` in `addProcessToQueue()` The thread object exists in memory but has not started yet
 
-3. **Running**: [When is P1 Running?]
+2. **Runnable**: P1 becomes Runnable when the main loop calls `currentThread.start();` It is ready to run and when the scheduler picks it it starts executing `run()`
 
-4. **Waiting**: [When and why would a thread be Waiting?]
+3. **Running**: P1 is Running while it executes inside `run()` during its time quantum printing the progress bar and reducing `remainingTime`
 
-5. **Terminated**: [When is P1 Terminated?]
+4. **Waiting**: There are two waiting threads P1 own thread is in Timed Waiting while it calls `Thread.sleep(stepTime);` inside `run()` The main thread is in Waiting at `currentThread.join();` until P1 finishes its quantum
+
+5. **Terminated**: P1 thread is Terminated when it reaches the end of `run()` Because a terminated thread cannot be started again a new `Thread` is created when P1 returns to the ready queue
 
 ## Question 4: Real-World Applications
 
@@ -327,32 +327,33 @@ Example from my output:
 
 **Your Answer:** *(3-5 sentences per example)*
 
-### Example 1 (operating-system level): [Name of scenario]
+### Example 1 (operating-system level): CPU scheduling between running programs
 
 **Description**:
-[Describe the real-world scenario.]
+On modern operating systems such as macOS or Windows, many programs run at the same time, for example a web browser, a code editor and a music player. The OS scheduler shares the CPU time between them using time slices, and its basic idea is the same as Round-Robin. In my simulation, each program is like a `Process` object, the time slice is the time quantum (5000ms in my run), and saving one program's state and switching to the next one is the context switch (27 in my run).
 
 **Why Round-Robin works well here**:
-[Fairness, responsiveness, predictability?]
+It is fair and responsive, because a heavy program cannot monopolize the CPU and freeze the user interface. Every program gets a regular turn, so the music keeps playing while the user types in the editor.
 
-### Example 2: [Name of application/scenario]
+### Example 2: Web server handling many requests
 
 **Description**:
-[Describe the real-world scenario or application.]
+A web server receives many requests from different users at the same time. Usually each request is handled by a worker thread, and the operating system schedules these threads on the CPU with a time-slicing approach similar to Round-Robin. In my simulation, each user request is like a `Process`, the time the OS gives each thread per turn is the time quantum, and moving between worker threads is the context switch.
 
 **Why Round-Robin works well here**:
-[Fairness, responsiveness, predictability?]
+It gives every user a quick first response instead of making small requests wait behind a huge data download. It is also predictable, because the waiting time depends on the number of active threads and the quantum size.
+## Summary
 
 ## Summary
 
 **Key concepts I understood through these questions:**
-1.
-2.
-3.
+1. The importance of `join()` for synchronizing threads and forcing an organized order in the scheduling logic
+2. How a thread moves between the lifecycle states (New, Runnable, Waiting, Terminated) during execution
+3. The difference between lightweight Java threads and the simulated `Process` objects in my code
 
 **Concepts I need to study more:**
-1.
-2.
+1. Advanced synchronization tools beyond `join()` such as mutexes semaphores and locks
+2. The cost of context switching at the hardware level and how memory is managed during interrupts
 
 ---
 
