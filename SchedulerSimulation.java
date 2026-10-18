@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.ArrayList;
 import java.util.List;
+   import java.util.Locale;
 
 // ANSI Color Codes for enhanced terminal output
 class Colors {
@@ -258,6 +259,8 @@ public class SchedulerSimulation {
         while (!processQueue.isEmpty()) {
             // Get the next thread from the queue (FIFO)
             Thread currentThread = processQueue.poll(); // Dequeues the next thread
+
+            contextSwitchCount++;
             
             // Print the current process queue (list of process IDs in the queue)
             System.out.println(Colors.BOLD + Colors.MAGENTA + "┌─ Ready Queue " + "─".repeat(65) + Colors.RESET);
@@ -275,9 +278,8 @@ public class SchedulerSimulation {
             System.out.println(Colors.BRIGHT_WHITE + "]" + Colors.RESET);
             System.out.println(Colors.BOLD + Colors.MAGENTA + "└" + "─".repeat(79) + Colors.RESET + "\n");
             
-            // A process is about to start running, so count one context switch
-            contextSwitchCount++;
 
+            
             // Start the thread, which will run the process for one time quantum
             currentThread.start();
             
@@ -326,16 +328,14 @@ public class SchedulerSimulation {
                           "╚════════════════════════════════════════════════════════════════════════════════╝" + 
                           Colors.RESET + "\n");
 
-        // Print the total number of context switches
-        System.out.println(Colors.BOLD + Colors.BRIGHT_YELLOW + "Total context switches: " + 
-                          Colors.RESET + contextSwitchCount + "\n");
+System.out.println(Colors.BOLD + Colors.YELLOW + "Total Context Switches: " + contextSwitchCount + Colors.RESET + "\n");
 
                                   // Print final table
         System.out.println(Colors.BOLD + Colors.BRIGHT_CYAN + "Process Name | Burst Time | Waiting Time | Turnaround Time" + Colors.RESET);
         System.out.println("-----------------------------------------------------------");
         for (Process p : allProcesses) {
-            System.out.printf("%-12s | %-9d | %-12d | %-15d%n",
-                    p.getName(), p.getBurstTime(), p.getWaitingTime(), p.getTurnaroundTime());
+   System.out.printf(Locale.US, "%-12s | %-9d | %-12d | %-15d%n",
+                       p.getName(), p.getBurstTime(), p.getWaitingTime(), p.getTurnaroundTime());
         }
     }
     

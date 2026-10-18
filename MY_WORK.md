@@ -29,11 +29,11 @@
 
 | Field | Your Answer |
 |-------|-------------|
-| **Full Name** | [Write your full name here] |
-| **Student ID** | [Write your student ID here] |
-| **University Email** | [yourid]@std.psau.edu.sa |
-| **GitHub Username** | [your-github-username] |
-| **Repository Link** | [Paste your repository link here] |
+| **Full Name** | [Abdullah Mubarak Alqaddan] |
+| **Student ID** | [446050819] |
+| **University Email** | [446050819]@std.psau.edu.sa |
+| **GitHub Username** | [ Abdullah Alqaddan] |
+| **Repository Link** | [https://github.com/AbdullahAlqaddan/OS-Assignment1-Abdullah-Alqaddan.git] |
  
 ---
 
@@ -115,9 +115,9 @@
 **Details**:
 - Created GitHub account with university email
 - Forked the starter repository and renamed it
-- Changed student ID on line 150 to my actual ID (441234567)
+- Changed student ID on line 150 to my actual ID (446050819)
 - Compiled and ran the program successfully
-- Committed and pushed: `Set my student ID: 441234567`
+- Committed and pushed: `Set my student ID: 446050819`
 
 **Challenges**: Had to install JDK first because `javac` wasn't recognized
 
@@ -129,68 +129,53 @@
 
 ## Your Development Log
 
-### Entry 1 - [Date and Time]
-**What I did**:
-
+### Entry 1 - October 9, 2026, 5 PM
+**What I did**: Started working on the assignment from the PDF summary.
 **Details**:
-
-**Challenges**:
-
-**Solution**:
-
-**Time spent**:
-
+- I practiced on my own in my IDE to learn how to create and manage threads.
+**Challenges**: The assignment was not visible on Blackboard, so I could not see the full instructions (for example, that I had to fork the starter repository on GitHub).
+**Solution**: I stopped working until the assignment became visible, then continued.
+**Time spent**: 1 hour
 ---
-
-### Entry 2 - [Date and Time]
-**What I did**:
-
+### Entry 2 - October 10, 2026, 5 PM
+**What I did**: Set up my tools and GitHub.
 **Details**:
-
-**Challenges**:
-
-**Solution**:
-
-**Time spent**:
-
+- Installed Git (Apple developer tools on my Mac), Java 21 and VS Code with the Java extension
+- Created my GitHub account with my university email
+- Forked the starter repository, renamed it, kept it public, and cloned it in VS Code
+**Challenges**: This was my first time using Git and GitHub, and I was not sure about the steps on macOS.
+**Solution**: I followed the steps one by one and checked the result on GitHub.
+**Time spent**: 30 minutes
 ---
-
-### Entry 3 - [Date and Time]
-**What I did**:
-
+### Entry 3 - October 10, 2026, 5 PM
+**What I did**: Set my student ID.
 **Details**:
-
-**Challenges**:
-
-**Solution**:
-
-**Time spent**:
-
+- Changed studentID on line 150 to 446050819
+- Committed and pushed: `Set my student ID`
+**Challenges**: I was not sure how to commit and push from VS Code.
+**Solution**: I used the Source Control panel: wrote a message, committed, then synced.
+**Time spent**: 35 minutes
 ---
-
-### Entry 4 - [Date and Time]
-**What I did**:
-
+### Entry 4 - October 18, 2026, 10 AM
+**What I did**: Added Feature 1 (Process Priority) and Feature 2 (Context Switch Counter).
 **Details**:
-
-**Challenges**:
-
-**Solution**:
-
-**Time spent**:
-
+- Added a priority field, constructor parameter and getter in the Process class
+- Generated the priority with random.nextInt(10) + 1 and printed it in addProcessToQueue(); the queue stays FIFO
+- Added a static int contextSwitchCount, incremented it right before currentThread.start(), and printed the total at the end (my run gave 27 context switches)
+**Challenges**: (1) I was not sure which println line to edit in addProcessToQueue(). (2) I forgot to add the context switch counter the first time and noticed it when I reviewed my code. (3) I implemented the features in one session, so they ended up in one commit instead of one commit per feature, because the full instructions were not visible to me earlier.
+**Solution**: (1) I searched the file for "added to ready queue" and edited that println. (2) I added the counter, the increment and the print, then re-ran the program.
+**Time spent**: 2.3 hours
 ---
-
-### Entry 5 - [Date and Time]
-**What I did**:
-
+### Entry 5 - October 18, 2026, 12 PM
+**What I did**: Added Feature 3 (Waiting Time Tracking) and fixed output problems.
 **Details**:
-
-**Challenges**:
-
-**Solution**:
-
-**Time spent**:
+- Added arrivalTime and finishTime using System.currentTimeMillis()
+- Waiting time = turnaround time - burst time
+- Printed the final table with all 14 processes
+- Fixed Arabic-Indic digits in the table by using Locale.US in printf
+**Challenges**: (1) VS Code showed "no registered task type 'Java'" when I pressed Run. (2) The table printed numbers like ١٢٠٣٨ because my Mac uses an Arabic locale.
+**Solution**: (1) I made sure the Java extension was working and reopened the project folder. (2) I added Locale.US to printf so the numbers print in English digits.
+**Time spent**: 45 minutes
 
 ---
 
@@ -211,14 +196,15 @@
 
 > 💡 **TIP:** Fill this in **last**, after all entries are written.
 
-**Total time spent on assignment**: [X hours]
+## Development Log Summary
 
-**Most challenging part**:
+**Total time spent on assignment**: about 5 hours
 
-**Most interesting learning**:
+**Most challenging part**: This was my first time uploading a project to GitHub so I had to learn Git and GitHub from scratch I also spent time trying to understand what every function in the code does
 
-**What I would do differently next time**:
+**Most interesting learning**: I enjoyed taking a close look at how Round-Robin works how each process runs for one time quantum and then goes back to the end of the queue I also learned what I can add or modify in the code to extend it
 
+**What I would do differently next time**: Next time I want to try a different scheduling algorithm like SJF (Shortest Job First) and add a mutex to protect shared data between threads or proccec
 ---
 
 # Part B: Reflection (0.5 mark)
@@ -237,7 +223,7 @@
 
 **Your Answer:** *(5-7 sentences)*
 
-[Write your answer here.]
+[Through this assignment I learned practically how multithreading works in Java First making the `Process` class implement `Runnable` means we define the code that a thread executes inside its `run()` method. When we call `start()` on a thread, Java begins running that `run()` method in a separate thread The most important part for me was `join()` because the main thread uses it to wait until the current thread finishes its time quantum  Without `join()` all the processes would run at the same time and the ready queue idea would break completely I used `Thread.sleep()` inside `run()` to simulate CPU processing time Finally, what surprised me is that a Java thread cannot be started again after it finishes so I have to create a `new Thread` every time a process goes back to the queue]
 
 ## Question 2: What was the most challenging part of this assignment?
 
