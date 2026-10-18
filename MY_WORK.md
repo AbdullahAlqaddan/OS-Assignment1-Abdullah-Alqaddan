@@ -39,7 +39,7 @@
 
 ## 🎥 Video Link
 
-**Video Link**: [Paste your video link here]
+**Video Link**: [[Paste your video link here](https://stdpsauedusa-my.sharepoint.com/:v:/g/personal/446050819_std_psau_edu_sa/IQBfPdq0YbMBSYXQVmfm1ublAdlAb8KYS06l84-TwRP7wsE?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=ZDLjBU)]
 
 > ⚠️ **WARNING:** The video must be **publicly accessible** ("Anyone with the link can view") on **Google Drive**, **YouTube (Unlisted or Public)** or any other cloud file-sharing system. A private, restricted or broken link counts as a **missing video (-1 mark)**.
 >
@@ -179,20 +179,6 @@
 
 ---
 
-### Entry 6 - [Optional - Date and Time]
-**What I did**:
-
-**Details**:
-
-**Challenges**:
-
-**Solution**:
-
-**Time spent**:
-
----
-
-## Development Log Summary
 
 > 💡 **TIP:** Fill this in **last**, after all entries are written.
 
@@ -344,7 +330,6 @@ A web server receives many requests from different users at the same time. Usual
 It gives every user a quick first response instead of making small requests wait behind a huge data download. It is also predictable, because the waiting time depends on the number of active threads and the quantum size.
 ## Summary
 
-## Summary
 
 **Key concepts I understood through these questions:**
 1. The importance of `join()` for synchronizing threads and forcing an organized order in the scheduling logic
